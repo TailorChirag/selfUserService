@@ -8,6 +8,6 @@ public class Configuration {
 
     @Bean
     public BCryptPasswordEncoder cryptPasswordEncoder(){
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(12);
     }
 }
