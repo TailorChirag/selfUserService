@@ -3,6 +3,7 @@ package com.scaler.selfuserservice.ControllerAdvices;
 
 import com.scaler.selfuserservice.dtos.ExceptionDto;
 import com.scaler.selfuserservice.exceptions.PasswordNotFoundException;
+import com.scaler.selfuserservice.exceptions.TokenNotExistOrAlreadyExpiredException;
 import com.scaler.selfuserservice.exceptions.UserNotFoundException;
 import com.scaler.selfuserservice.exceptions.UsernameNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -39,6 +40,16 @@ public class ExceptionHandlers {
 
     @ExceptionHandler(PasswordNotFoundException.class)
     private ResponseEntity<ExceptionDto> handlePasswordNotFoundException(PasswordNotFoundException message){
+        ExceptionDto dto = new ExceptionDto();
+        dto.setMesasgae(message.getMessage());
+        return new ResponseEntity<>(
+                dto,
+                HttpStatus.NOT_FOUND
+        );
+    }
+    @ExceptionHandler(TokenNotExistOrAlreadyExpiredException.class)
+    private ResponseEntity<ExceptionDto> handleTokenNotExistOrAlreadyExpiredException(
+            TokenNotExistOrAlreadyExpiredException message){
         ExceptionDto dto = new ExceptionDto();
         dto.setMesasgae(message.getMessage());
         return new ResponseEntity<>(

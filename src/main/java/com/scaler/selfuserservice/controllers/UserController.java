@@ -1,12 +1,15 @@
 package com.scaler.selfuserservice.controllers;
 
 import com.scaler.selfuserservice.dtos.LoginRequestDto;
+import com.scaler.selfuserservice.dtos.LogoutRequestDto;
 import com.scaler.selfuserservice.dtos.SignUpRequestDto;
 import com.scaler.selfuserservice.exceptions.PasswordNotFoundException;
+import com.scaler.selfuserservice.exceptions.TokenNotExistOrAlreadyExpiredException;
 import com.scaler.selfuserservice.exceptions.UsernameNotFoundException;
 import com.scaler.selfuserservice.models.Token;
 import com.scaler.selfuserservice.models.User;
 import com.scaler.selfuserservice.services.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,4 +41,10 @@ public class UserController {
         return userService.login(requestDto.getEmail(), requestDto.getPassword());
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(@RequestBody() LogoutRequestDto logoutRequestDto) throws TokenNotExistOrAlreadyExpiredException {
+        userService.logout(logoutRequestDto.getToken());
+        return new ResponseEntity<>(HttpStatus.ACCEPTED
+        );
+    }
 }

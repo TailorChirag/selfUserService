@@ -1,6 +1,7 @@
 package com.scaler.selfuserservice.services;
 
 import com.scaler.selfuserservice.exceptions.PasswordNotFoundException;
+import com.scaler.selfuserservice.exceptions.TokenNotExistOrAlreadyExpiredException;
 import com.scaler.selfuserservice.exceptions.UsernameNotFoundException;
 import com.scaler.selfuserservice.models.Token;
 import com.scaler.selfuserservice.models.User;
@@ -69,6 +70,19 @@ public class UserService {
         return tokenRepository.save(token);
     }
 
+    public void logout(String value) throws TokenNotExistOrAlreadyExpiredException {
 
+        Optional<Token> optionalToken = tokenRepository.findByValueAndDeleted(value,false);
 
+        if (optionalToken.isEmpty()){
+            throw new TokenNotExistOrAlreadyExpiredException("Token is expired or incorrect");
+        }
+
+        Token token = optionalToken.get();
+
+        token.setDeleted(true);
+        tokenRepository.save(token);
+
+        return;
+    }
 }
