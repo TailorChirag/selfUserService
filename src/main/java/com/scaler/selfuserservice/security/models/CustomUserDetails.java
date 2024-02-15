@@ -20,6 +20,24 @@ public class CustomUserDetails implements UserDetails {
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
     private boolean enabled;
+    private String usName;
+    private Long userId;
+
+    public String getUsName() {
+        return usName;
+    }
+
+    public void setUsName(String usName) {
+        this.usName = usName;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public CustomUserDetails(){}
 
@@ -30,6 +48,8 @@ public class CustomUserDetails implements UserDetails {
        this.enabled = true;
        this.password = user.getHashedPassword();
        this.username = user.getEmail();
+       this.usName = user.getName();
+       this.userId = user.getId();
 
        List<CustomGrantedAuthority> grantedAuthorities = new ArrayList<>();
 
