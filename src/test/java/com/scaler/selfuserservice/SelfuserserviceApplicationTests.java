@@ -1,5 +1,6 @@
 package com.scaler.selfuserservice;
 
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,10 +26,11 @@ class SelfuserserviceApplicationTests {
 
 //    @Test
 //    @Commit
+//    @Transactional
 //    void storeRegisteredClientDetails(){
 //        RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
 //                .clientId("oidc-client")
-//                .clientSecret("{noop}secret")
+//                .clientSecret("{noop}student")
 //                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
 //                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
 //                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
@@ -37,6 +39,8 @@ class SelfuserserviceApplicationTests {
 //                .scope(OidcScopes.OPENID)
 //                .scope(OidcScopes.PROFILE)
 //                .scope("ADMIN")
+//                .scope("INSTRUCTOR")
+//                .scope("STUDENT")
 //                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
 //                .build();
 //

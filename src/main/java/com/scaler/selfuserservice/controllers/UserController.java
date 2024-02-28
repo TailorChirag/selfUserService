@@ -1,5 +1,6 @@
 package com.scaler.selfuserservice.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.scaler.selfuserservice.dtos.LoginRequestDto;
 import com.scaler.selfuserservice.dtos.LogoutRequestDto;
 import com.scaler.selfuserservice.dtos.SignUpRequestDto;
@@ -26,7 +27,7 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public User signUp(@RequestBody() SignUpRequestDto request){
+    public User signUp(@RequestBody() SignUpRequestDto request) throws JsonProcessingException {
 
         String name = request.getName();
         String email = request.getEmail();
